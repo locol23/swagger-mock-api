@@ -5,12 +5,12 @@ RUN apk update && apk upgrade && \
 
 RUN mkdir -p /app
 RUN cd /app && git clone https://Github.com/swagger-api/swagger-codegen
-ADD spec.yml /app/swagger-codegen/spec.yml
+ADD spec.yaml /app/swagger-codegen/spec.yaml
 
 RUN cd /app/swagger-codegen
 RUN wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -O swagger-codegen-cli.jar
 
-RUN java -jar /swagger-codegen-cli.jar generate -i /app/swagger-codegen/spec.yml -l nodejs-server -o /app/swagger-codegen/mock
+RUN java -jar /swagger-codegen-cli.jar generate -i /app/swagger-codegen/spec.yaml -l nodejs-server -o /app/swagger-codegen/mock
 RUN cd /app/swagger-codegen/mock && npm install
 
 EXPOSE 8080
